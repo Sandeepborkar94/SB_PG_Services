@@ -3,6 +3,9 @@ package com.product.app.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.product.app.dto.ProductDTO;
@@ -28,6 +31,8 @@ public class ProductServiceImpl implements ProductService
 	}
 
 	@Override
+//	 GET product by ID - Cacheable
+	@Cacheable(value = "products", key = "#id")
 	public ProductDTO getProductById(Long id) 
 	{
 		
@@ -48,6 +53,8 @@ public class ProductServiceImpl implements ProductService
 	}
 
 	@Override
+	// UPDATE product - Cache update
+	@CachePut(value = "products", key = "#id")
 	public ProductDTO updateProduct(Long id, ProductDTO dto)
 	{
 		Product product = productRepo.findById(id)
@@ -61,6 +68,8 @@ public class ProductServiceImpl implements ProductService
 	}
 
 	@Override
+	// DELETE product - Evict from cache
+	@CacheEvict(value = "products", key = "#id")
 	public void deleteProduct(Long id)
 	{
 		 Product product = productRepo.findById(id)

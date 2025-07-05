@@ -1,5 +1,7 @@
 package com.product.app.dto;
 
+import java.io.Serializable;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,18 +15,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductDTO 
+public class ProductDTO implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 
-    @NotBlank(message = "Name cannot be blank")
+//    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotNull(message = "Price cannot be null")
-    @Positive(message = "Price must be greater than zero")
+//    @NotNull(message = "Price cannot be null")
+//    @Positive(message = "Price must be greater than zero")
     private Double price;
 
-    @Min(value = 0, message = "Quantity must be non-negative")
+//    @Min(value = 0, message = "Quantity must be non-negative")
     private Integer quantity;
 
 }
