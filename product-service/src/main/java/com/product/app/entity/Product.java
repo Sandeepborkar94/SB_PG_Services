@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product 
+public class Product implements AutoCloseable
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,22 @@ public class Product
 	@Positive(message = "Price must be positive")
 	private Double price;
 	
-	@Min(value = 0, message = "Quantity must be 0 or more")
+	@Min(value = 0, message = "Quantity must be 0 or more ")
 	private Integer quantity;
+
+	@Override
+	public void close() throws Exception
+	{
+			// Implement any resource cleanup logic if necessary
+		// For example, if this entity holds any resources that need to be released
+		// In this case, we don't have any resources to clean up, so this can be empty	
+		
+		// This method is here to demonstrate the AutoCloseable interface
+		
+		
+		
+		
+	}
 	
 	
 	
